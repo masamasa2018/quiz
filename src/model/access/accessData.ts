@@ -1,16 +1,24 @@
-import db from "../../firebase";
-import admin from 'firebase-admin'
+// import db from "../../firebase";
+// import admin from 'firebase-admin'
 
+import access from '../../components/api/access'
+import util from '../../components/util'
 
-function insert(uri:String) {
-  db.collection("access").add({
-    uri: uri,
-    createAt: new Date() 
-    // createAt: admin.firestore.Timestamp.now()
-   })
+async function insert() {
+
+  if (location.host.match(/localhost/)) {
+    console.log("ssssss");
+  } else {
+    const uuid: string | null = util.getUuid();
+    await access.insertAccess(location.host, location.pathname, uuid);
+    // db.collection("access").add({
+    //   uri: location.pathname,
+    //   host: location.host,
+    //   createAt: new Date() 
+    //  })
+  }
 }
 
-// 関数をエクスポートします。
 export default {
   insert,
   

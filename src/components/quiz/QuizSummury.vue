@@ -13,10 +13,8 @@
 
 <script lang="ts" setup>
 
-import type { Dictionary } from "@firebase/component/dist/src/types";
 import util from "../../components/util";
 import quizData from "../../model/quiz/quizData"; 
-import categoryImageList from "../../components/common/categoryImageList.vue";
 
 const props = defineProps({
   categoryId: {
@@ -30,15 +28,96 @@ const props = defineProps({
   
 });
 
-var categoryData: Dictionary = quizData.getCategoryData(props.categoryId)
-var quizNum :number  =  Number(categoryData["num"]) 
+var categoryData = quizData.getCategoryData(props.categoryId);
+var quizNum :number  =  Number(categoryData["num"]);
 
-console.log(quizNum);
-var summury = util.getResultSummary(props.categoryId , props.id , quizNum )
+var summury = util.getQuizResultSummary(props.categoryId , props.id , quizNum );
 
 //値の比較
 function comparison(a: any, b: any) {
   return a == b;
 }
-
 </script>
+
+<style lang="scss">
+
+.box_info_summury {
+      position: relative;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px;
+
+      border: none ;
+      background-color: whitesmoke;/* 背景色 */  
+      padding: 0.1em;
+      
+      margin-bottom: 1em;
+}
+
+.pattern_now {
+  border: 1.5px solid #27acd9;
+	width: 15%;
+  /* margin-top: 0.2em; */
+  margin-bottom: 0.1em;
+  margin-right: 0.1em;
+  margin-left: 0.1em;
+  border-radius: 50%;
+  background: white;
+  color:black;
+  
+}
+
+.pattern_correct {
+  border: 1.5px solid #27acd9;
+  background: #27acd9;
+  color: white;
+	width: 15%;
+  /* margin-top: 0.2em; */
+  margin-bottom: 0.1em;
+  margin-right: 0.1em;
+  margin-left: 0.1em;
+  border-radius: 50%;
+}
+
+.pattern_incorrect {
+  border: 1.5px solid orangered;
+  background: orangered;
+  color: white;
+	width: 15%;
+  /* margin-top: 0.2em; */
+  margin-bottom: 0.1em;
+  margin-right: 0.1em;
+  margin-left: 0.1em;
+  border-radius: 50%;
+}
+
+.result_box {
+  margin-left: 0.2em;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  // margin: auto;
+  // border: 1.5px solid #27acd9;
+  width: 300px;
+  /* height: 3em; */
+  text-align:center;
+  color: black;
+  /* background: #27acd9; */
+	display: flex; /* flexbox */
+	
+  /* margin-top: 0.2em; */
+}
+
+ .pattern_none {
+  border: 0.1px solid #27acd9;
+	width: 15%;
+  /* margin-top: 0.2em; */
+  margin-bottom: 0.1em;
+  margin-right: 0.1em;
+  margin-left: 0.1em;
+  border-radius: 50%;
+  background: white;
+  color:darkgray;
+}
+
+</style>

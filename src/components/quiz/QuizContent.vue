@@ -1,16 +1,20 @@
 <template>
-
-    <div class="box_body">
-        <div class="block_number">第{{id}}問</div>
-        <div class="block_question">{{question}}</div>
-
+    <div class="common_box_body">
+        <div class="quiz_number">第{{id}}問</div>
+        <div class="quiz_question">{{question}}</div>
         <div class="box_answer">
           <ul >
             <li>
               <div v-for="(answer, index) in answers" :key="answer">
                 
                   <RouterLink v-bind:to="{ path: '/answer/' + categoryId + '/' + id + '/' + index   }">
-                    <button class="answer" >{{index}} . {{answer}}</button>
+                    
+                    <button class="answer" >
+                      <div style="word-wrap: break-word;">
+                      {{index}} . {{answer}}
+                      </div>
+                    </button>
+                  
                   </RouterLink>
               </div>
             </li>
@@ -18,8 +22,6 @@
       </div>
 
     </div>
-
-
 </template>
 
 
@@ -28,30 +30,18 @@
 import { defineComponent } from "vue"
 import quizData from "../../model/quiz/quizData"
 import accessData from "../../model/access/accessData"
-
-
 import util from "../../components/util"
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
-
-// import {CONFIG} from "../../components/config"
-
 
 const route = useRoute();
 
 const id : any = Number(route.params.id);
 const categoryId : number = Number(route.params.category_id);
 
-const data = await quizData.getQuizData(categoryId as  number ,id as  number)  
+const data = await quizData.getQuizData(categoryId as number,id as number);
 const answers = data["answers"];
 const question = data["question"];
-
-const getUuid = util.getUuidLS();
-// console.log(getUuid)
-if (!getUuid) {
-  const uuid = util.getUniqueStr()
-  localStorage.setItem('uuid', uuid)
-}
 
 
 const result: any = [
@@ -79,10 +69,38 @@ const result: any = [
     
   }
 
-
-
- 
-
-
-
 </script>
+
+<style lang="scss">
+.box_answer {
+  position: relative;
+  padding: 0.1em;
+  margin-top: 0.2em;
+  background: lightgray;
+}
+
+button.answer {
+  overflow-wrap: break-word;
+  font-size:0.9em;
+  text-align: left;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  width: 97%;
+  height: 3.5em;
+  display:block;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  margin-bottom: 0.2em;
+  margin-top: 0.2em;
+  white-space: nowrap;
+  color:black;
+  background-color:white;
+  border-radius: 7px;
+  border-width:thin;
+
+  &:hover {
+    font-weight: bold;
+  }
+}
+
+</style>

@@ -1,31 +1,22 @@
 <template>
 
+<p class="common_title2">お問合せフォーム</p>
+
  <div v-if="sended">
-    <h3>>送信完了</h3>
-    お問合せいただきありがとうございました！
-    また何かありましたらよろしくお願いいたします。
-  
+    <h3>送信完了</h3>
+    <p>お問合せいただきありがとうございました！</p>
+    <p>また何かありましたらよろしくお願いいたします。</p>
   </div>
   
-  <div v-else>
+ <div v-else>
     
     <form @submit.prevent="submitForm">
 
           <div class="Form">
               <div class="Form-Item">
-                <!-- <p class="Form-Item-Label">
-                  <span class="Form-Item-Label-Required">必須</span>会社名
-                </p>
-                <input type="text" class="Form-Item-Input" placeholder="例）株式会社令和"> -->
-              </div>
-              <div class="Form-Item">
                 <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>氏名</p>
                 <input type="text" class="Form-Item-Input" id="name" v-model="name" required placeholder="例）山田太郎">
               </div>
-              <!-- <div class="Form-Item">
-                <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>電話番号</p>
-                <input type="text" class="Form-Item-Input" placeholder="例）000-0000-0000">
-              </div> -->
 
               <div class="Form-Item">
                 <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>メールアドレス</p>
@@ -37,32 +28,25 @@
               </div>
               <input type="submit" class="Form-Btn" value="送信する">
           </div>
-
     </form>
-
   </div>
-
-
 
 </template>
 
-  <script>
-  import { ref } from 'vue';
+<script lang="ts">
+import { ref } from 'vue';
+import inqueryData from "../../model/inquery/inqueryData"
+import type { Ref } from 'vue'
 
-  import inqueryData from "../model/inquery/inqueryData"
-  
-  export default {
+export default {
     setup() {
-      const name = ref('');
-      const email = ref('');
-      const message = ref('');
+      const name: Ref<string> = ref('');
+      const email: Ref<string> = ref('');
+      const message: Ref<string> = ref('');
 
       const sended = ref(false);
-      
-
   
       const submitForm = () => {
-
         const data = {
           name: name.value,
           email: email.value,
@@ -72,8 +56,6 @@
 
         inqueryData.insert(data.name , data.email , data.message);
 
-        // ここでデータを送信する処理を実装
-        console.log(data);
         // フォームのリセット
         name.value = '';
         email.value = '';
@@ -82,43 +64,42 @@
 
       };
   
-      return {
-        name,
-        email,
-        message,
-        sended,
-        submitForm,
-      };
-    }
-  };
-  </script>
+    return {
+      name,
+      email,
+      message,
+      sended,
+      submitForm,
+    };
+  }
+};
+</script>
 
-
-<style>
+<style lang="scss">
 Form {
-  margin-top: 80px;
+  margin-bottom: 0;
   margin-left: auto;
   margin-right: auto;
   max-width: 720px;
 }
 @media screen and (max-width: 480px) {
   .Form {
-    margin-top: 40px;
+    margin-top: 3px;
   }
 }
 .Form-Item {
   border-top: 1px solid #ddd;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  padding-top: 5px;
+  padding-bottom: 10px;
   width: 100%;
   display: flex;
   align-items: center;
 }
 @media screen and (max-width: 480px) {
   .Form-Item {
-    padding-left: 14px;
-    padding-right: 14px;
-    padding-top: 16px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 4px;
     padding-bottom: 16px;
     flex-wrap: wrap;
   }
@@ -138,11 +119,11 @@ Form {
     max-width: inherit;
     display: flex;
     align-items: center;
-    font-size: 15px;
+    font-size: 12px;
   }
 }
 .Form-Item-Label.isMsg {
-  margin-top: 8px;
+  margin-top: 3px;
   margin-bottom: auto;
 }
 @media screen and (max-width: 480px) {
@@ -153,7 +134,7 @@ Form {
 .Form-Item-Label-Required {
   border-radius: 6px;
   margin-right: 8px;
-  padding-top: 8px;
+  padding-top: 3px;
   padding-bottom: 8px;
   width: 48px;
   display: inline-block;
@@ -180,14 +161,14 @@ Form {
   height: 48px;
   flex: 1;
   width: 100%;
-  max-width: 320px;
+  max-width: 350px;
   background: #eaedf2;
   font-size: 18px;
 }
 @media screen and (max-width: 480px) {
   .Form-Item-Input {
     margin-left: 0;
-    margin-top: 18px;
+    margin-top: 2px;
     height: 40px;
     flex: inherit;
     font-size: 15px;
@@ -202,7 +183,7 @@ Form {
   height: 216px;
   flex: 1;
   width: 100%;
-  max-width: 320px;
+  max-width: 350px;
   background: #eaedf2;
   font-size: 18px;
 }
@@ -216,13 +197,14 @@ Form {
   }
 }
 .Form-Btn {
-  border-radius: 6px;
-  margin-top: 32px;
+  border-radius: 2px;
+  margin-top: 2px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   width: 280px;
+  
   display: block;
   letter-spacing: 0.05em;
   background: #5bc8ac;
