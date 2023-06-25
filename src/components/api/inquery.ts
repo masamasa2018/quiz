@@ -8,7 +8,7 @@ interface InqueryData {
   email: string;
   message: string;
 }
-//UUIDを生成する
+//UIDを生成する
 const insertInquery = async (name :string ,email :string , message :string) => {
   const url: string = CONFIG.baseApiUrl + basePath;
   const data: InqueryData = { name: name, email: email, message: message};

@@ -15,23 +15,23 @@
 
 import util from "../../components/util";
 import quizData from "../../model/quiz/quizData"; 
+import type { CategoryConfig } from "../../model/quiz/quizData";
 
 const props = defineProps({
-  categoryId: {
+  category: {
     type: Number,
     default: 1
   },
-  id: {
+  code: {
     type: Number,
     default: 1
   },
-  
 });
 
-var categoryData = quizData.getCategoryData(props.categoryId);
-var quizNum :number  =  Number(categoryData["num"]);
+var categoryData: CategoryConfig = quizData.getCategoryData(props.category);
+var quizNum: number = Number(categoryData["num"]);
 
-var summury = util.getQuizResultSummary(props.categoryId , props.id , quizNum );
+var summury = util.getQuizResultSummary(props.category , props.code , quizNum );
 
 //値の比較
 function comparison(a: any, b: any) {
@@ -42,17 +42,15 @@ function comparison(a: any, b: any) {
 <style lang="scss">
 
 .box_info_summury {
-      position: relative;
-      border-top-left-radius: 2px;
-      border-top-right-radius: 2px;
-      border-bottom-left-radius: 2px;
-      border-bottom-right-radius: 2px;
-
-      border: none ;
-      background-color: whitesmoke;/* 背景色 */  
-      padding: 0.1em;
-      
-      margin-bottom: 1em;
+  position: relative;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border: none ;
+  background-color: whitesmoke;
+  padding: 0.1em;
+  margin-bottom: 1em;
 }
 
 .pattern_now {
@@ -65,7 +63,6 @@ function comparison(a: any, b: any) {
   border-radius: 50%;
   background: white;
   color:black;
-  
 }
 
 .pattern_correct {
@@ -96,16 +93,13 @@ function comparison(a: any, b: any) {
   margin-left: 0.2em;
   margin-top: 0.3em;
   margin-bottom: 0.3em;
-  // margin: auto;
-  // border: 1.5px solid #27acd9;
+
   width: 300px;
-  /* height: 3em; */
   text-align:center;
   color: black;
-  /* background: #27acd9; */
+
 	display: flex; /* flexbox */
 	
-  /* margin-top: 0.2em; */
 }
 
  .pattern_none {

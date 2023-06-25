@@ -6,33 +6,33 @@ import quizResultLS from '../model/quiz/quizResultLS';
 const route = useRoute()
 const router = useRouter()
 
-//UUIDをローカルストレージから取得する
-const getUuid = () => {
+//UIDをローカルストレージから取得する
+const getUid = () => {
 
-  let getUuid: string | null = getUuidLS();
+  let getUid: string | null = getUidLS();
   
-  if (!getUuid) {
-    const uuid: string = getUniqueStr();
-    localStorage.setItem('uuid', uuid)
-    getUuid = getUuidLS();
+  if (!getUid) {
+    const uid: string = getUniqueStr();
+    localStorage.setItem('uid', uid)
+    getUid = getUidLS();
   }
-  return getUuid;
+  return getUid;
 
 };
 
 
-//UUIDを生成する
+//UIDを生成する
 const getUniqueStr = (myStrong?: any) => {
   let strong = 1000;
   if (myStrong) strong = myStrong;
-  const uuid :string = new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16)
-  return uuid;
+  const uid :string = new Date().getTime().toString(16) + Math.floor(strong * Math.random()).toString(16)
+  return uid;
 };
 
-//UUIDをローカルストレージから取得する
-const getUuidLS = () => {
-  const getUuid: string | null = localStorage.getItem("uuid");
-  return getUuid;
+//UIDをローカルストレージから取得する
+const getUidLS = () => {
+  const getUid: string | null = localStorage.getItem("uid");
+  return getUid;
 };
 
 // ブラウザバックを無効化
@@ -44,8 +44,8 @@ const invalidateBack = () => {
 };
 
 
-function getQuizResultNum(categoryId: number, allNum: number): number {
-  const corrctResult = quizResultLS.getQuizResult(categoryId);
+function getQuizResultNum(category: number, allNum: number): number {
+  const corrctResult = quizResultLS.getQuizResult(category);
   let corrctNum: number = 0;
   for (let i: number = 1; i <= allNum; i++) { 
     if (corrctResult[i] == true) {
@@ -55,15 +55,15 @@ function getQuizResultNum(categoryId: number, allNum: number): number {
   return corrctNum;
 }
 
-function getQuizResultSummary(categoryId:number , id:number , allNum:number){
+function getQuizResultSummary(category:number , code:number , allNum:number){
 
-  const corrctResult = quizResultLS.getQuizResult(categoryId);
+  const corrctResult = quizResultLS.getQuizResult(category);
   const allCount:number = allNum;
   const summury: string[] = [];
   for (let i: number = 1; i <= allCount; i++) {
     summury[i] = "none";
 
-    if(i == id ){
+    if(i == code ){
       summury[i] = "now";
     }
     if(corrctResult){
@@ -77,8 +77,6 @@ function getQuizResultSummary(categoryId:number , id:number , allNum:number){
       }
     }
 
-
-
   }
   return summury;
 
@@ -86,9 +84,9 @@ function getQuizResultSummary(categoryId:number , id:number , allNum:number){
 
 export default {
   getUniqueStr,
-  getUuidLS,
+  getUidLS,
   invalidateBack,
-  getUuid,
+  getUid,
 
   getQuizResultSummary,
   getQuizResultNum,

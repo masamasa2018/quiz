@@ -1,25 +1,22 @@
 <template>
     <div class="common_box_body">
-        <div class="quiz_number">第{{id}}問</div>
+        <div class="quiz_number">第{{code}}問</div>
         <div class="quiz_question">{{question}}</div>
         <div class="box_answer">
           <ul >
             <li>
               <div v-for="(answer, index) in answers" :key="answer">
-                
-                  <RouterLink v-bind:to="{ path: '/answer/' + categoryId + '/' + id + '/' + index   }">
-                    
+                  <RouterLink v-bind:to="{ path: '/answer/' + category + '/' + code + '/' + index   }">
                     <button class="answer" >
                       <div style="word-wrap: break-word;">
                       {{index}} . {{answer}}
                       </div>
                     </button>
-                  
                   </RouterLink>
               </div>
             </li>
           </ul>
-      </div>
+       </div>
 
     </div>
 </template>
@@ -36,17 +33,18 @@ import { useRouter } from "vue-router";
 
 const route = useRoute();
 
-const id : any = Number(route.params.id);
-const categoryId : number = Number(route.params.category_id);
+const category : number = Number(route.params.category);
+const code : any = Number(route.params.code);
 
-const data = await quizData.getQuizData(categoryId as number,id as number);
+const data = await quizData.getQuizData(category, code);
+
 const answers = data["answers"];
 const question = data["question"];
 
 
 const result: any = [
     {
-      category_id :1,
+      category :1,
       1: true,
       2: false,
       3: true,

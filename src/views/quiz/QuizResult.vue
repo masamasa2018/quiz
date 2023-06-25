@@ -41,13 +41,13 @@ import util from "../../components/util";
 const route = useRoute()
 const router = useRouter();
 
-const categoryId : number = Number(route.params.category_id);
+const category: number = Number(route.params.category);
 
-const categoryData = quizData.getCategoryData(categoryId);
+const categoryData = quizData.getCategoryData(category);
 
-const quizTitle:string = categoryData.name;
+const quizTitle: string = categoryData.name;
 
-const corrctNum = util.getQuizResultNum(categoryId,categoryData.num)
+const corrctNum = util.getQuizResultNum(category,categoryData.num)
 
 
 let evaluationInfo : string = "もう少しでした。なかなかのマニアです！"

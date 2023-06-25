@@ -1,9 +1,9 @@
 <template>
     <ul class="images_box">
-        <li><img :src="'/img/category/' +  props.categoryId + '/1.jpg'" class="image_frame"></li>
-        <li><img :src="'/img/category/' +  props.categoryId + '/2.jpg'" class="image_frame"></li>
-        <li v-if="props.isMoblie==false && props.categoryId ==1 ">
-            <img :src="'/img/category/' +  props.categoryId + '/3.jpg'" class="image_frame">
+        <li><img :src="'/img/category/' +  props.category + '/1.jpg'" class="image_frame"></li>
+        <li><img :src="'/img/category/' +  props.category + '/2.jpg'" class="image_frame"></li>
+        <li v-if="props.isMoblie==false && props.category ==1 ">
+            <img :src="'/img/category/' +  props.category + '/3.jpg'" class="image_frame">
         </li>
     </ul>
 </template>
@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 
 const props = defineProps({
-  categoryId: {
+  category: {
     type: Number,
     default: 1,
   },

@@ -9,6 +9,13 @@ import { createRouter, createWebHistory } from "vue-router";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+  
+    {
+      path: '/test',
+      name: 'test',
+      component: () => import("../views/TestView.vue"),
+    },
+  
     {
       path: '/',
       name: 'home',
@@ -30,22 +37,22 @@ const router = createRouter({
       component: () => import("../views/quiz/QuizTop.vue"),
     },
     {
-      path: "/start/:category_id",
+      path: "/start/:category",
       name: "start",
       component: () => import("../views/quiz/QuizStart.vue"),
     },
     {
-      path: "/result/:category_id/",
+      path: "/result/:category/",
       name: "result",
       component: () => import("../views/quiz/QuizResult.vue"),
     },
     {
-      path: "/quiz/:category_id/:id",
+      path: "/quiz/:category/:code",
       name: "quiz",
       component: () => import("../views/quiz/QuizContent.vue"),
     },
     {
-      path: "/answer/:category_id/:id/:answer_id",
+      path: "/answer/:category/:code/:answer_id",
       name: "answer",
       component: () => import("../views/quiz/QuizAnswer.vue"),
     },

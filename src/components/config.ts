@@ -1,3 +1,4 @@
 export const CONFIG = {
-  baseApiUrl:"https://3bcvj2y0c2.execute-api.ap-northeast-1.amazonaws.com"
+  baseApiUrl: "https://y7t7vpbj73.execute-api.ap-northeast-1.amazonaws.com"
+  //baseApiUrl: "https://pf6p05w9a7.execute-api.ap-northeast-1.amazonaws.com"
 };

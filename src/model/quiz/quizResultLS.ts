@@ -1,6 +1,6 @@
 //クイズ結果を取得
-function getQuizResult(categoryId: number) {
-  const QuizResultLS = localStorage.getItem("quizResult" + categoryId);
+function getQuizResult(category: number) {
+  const QuizResultLS = localStorage.getItem("quizResult" + category);
   if (QuizResultLS !== null) {
     const QuizResultArray = JSON.parse(QuizResultLS);
     return QuizResultArray;
@@ -8,20 +8,18 @@ function getQuizResult(categoryId: number) {
     return;
   }
 }
-
 //クイズ結果を削除
-function deleteQuizResult(categoryId:number) {
-  localStorage.removeItem("quizResult" + categoryId);
+function deleteQuizResult(category:number) {
+  localStorage.removeItem("quizResult" + category);
 }
-
 //クイズ結果を保存
-function saveQuizResult(categoryId:number,  id :number , correctFlag :boolean) {
+function saveQuizResult(category:number,  code :number , correctFlag :boolean) {
   const resultArray: { [key: string]: boolean } = {}
-  const quizResultLS = localStorage.getItem("quizResult" + categoryId);
+  const quizResultLS = localStorage.getItem("quizResult" + category);
 
   //新規
   if(quizResultLS == null){
-    resultArray[id] = correctFlag;
+    resultArray[code] = correctFlag;
   //LSから既存レコードから取得して変更
   } else {
     const quizResultJsonParse = JSON.parse(quizResultLS);
@@ -32,9 +30,9 @@ function saveQuizResult(categoryId:number,  id :number , correctFlag :boolean) {
       const tmpValue = quizResultJsonParse[quizResultkeyList[key]];
       resultArray[tmpKey] = tmpValue;
     }
-    resultArray[id] = correctFlag;
+    resultArray[code] = correctFlag;
   }
-  localStorage.setItem("quizResult" + categoryId,  JSON.stringify(resultArray) );
+  localStorage.setItem("quizResult" + category,  JSON.stringify(resultArray) );
 }
 
 export default {

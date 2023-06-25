@@ -218,14 +218,7 @@ li{
   white-space: pre-line;
 }
 
-.correct_text {
-  color: #007bff;
-  margin-top: 1em;
-  margin-left: 0.1em;
-  margin-bottom: 0em;
-  font-size: 1.2em;
-  font-weight: bold;
-}
+
 
 .info_text {
   margin-top: 0em;
@@ -235,20 +228,7 @@ li{
   font-size: 1em;
 }
 
-.block_correct_right {
-  color: #007bff;
-  margin-top: 0em;
-  margin-left: 0.5em;
-  font-weight: bold;
-}
 
-.block_correct_left {
-  color: red;
-  margin-top: 0.2em;
-  margin-bottom: 0.2em;
-  margin-left: 0.7em;
-  font-weight: bold;
-}
 
 .block_start {
   overflow-wrap: break-word;
@@ -260,23 +240,7 @@ li{
 }
 
 
-button.next {
-  box-shadow:none;
-  margin-left:auto;
-  font-size: 1em;
-  text-align: center;
-  justify-content: flex-end;
-  background-color:mediumseagreen;
-  color: white;
-  width: 30%;
-  height: 3em;
-  display:block;
-  margin-top: 0.5em;
-  white-space: nowrap;
-  border-radius:20px;
-  font-weight: bold;
-  border: 1px solid #ccc;
-}
+
 button.result {
   border: none;
   margin-left:auto;
@@ -303,7 +267,6 @@ button.restart {
   width: 200px;
   margin: auto;
   margin-top: 1.5em;
-  // padding: 1rem 2rem;
   font-weight: bold;
   border: 2px solid #27acd9;
   color: #27acd9;
@@ -442,20 +405,5 @@ figure img {
   background:#fff;
  }
 
-.box_info_answer {
-  position: relative;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
-  border: 0.1px solid white;
-  padding-top: 0.6em;
-  padding-bottom: 0.6em;
-  margin-top: 1em;
-  margin-bottom: 2em;
-  margin-left: 0.1em;
-  margin-right: 0.2em;
-  background: whitesmoke;
-  white-space: pre-line;
-}
+
 </style>

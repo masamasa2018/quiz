@@ -1,7 +1,13 @@
 <template>
-<QuizSummury :categoryId="categoryId" :id="id"/>
+<QuizSummury :category="category" :code="code"/>
   <div class="common_box_body">
-      <div class="block_number">第{{id}}問 </div>
+
+    <div class="block_number_container">
+        第{{code}}問
+        
+        <LikeQuiz :category="props.category" :code="props.code" />
+    </div>
+
       <div class="box_info_answer">
         <div v-if="isCorrectFlag">
           <p class="block_correct_right"> ● 正解</p>
@@ -11,6 +17,14 @@
         </div>
         <p class="info_text">{{info}}</p>
       </div>
+  <div v-if="lastFlag">
+    <RouterLink v-bind:to="{ path: '/result/'+ category }">
+      <button class="result">結果をみる</button>
+    </RouterLink>
+  </div>
+  <div v-else>
+    <nextLink :category="category" :nextCode="nextCode"/>
+  </div>
 
       <div class="correct_text">正解は{{correct_code}}</div>
 
@@ -22,6 +36,8 @@
           <button class="answer_button_disabled"  disabled>{{index}} . {{answer}}</button>
       </div>
      </div>
+
+     
   </div>
 </template>
 
@@ -36,12 +52,16 @@ import util from "../../components/util";
 import quizResultLS from "../../model/quiz/quizResultLS"; 
 import QuizSummury from "../../components/quiz/QuizSummury.vue";
 
+import nextLink from "../../components/common/nextLink.vue";
+
+import LikeQuiz from "../../components/quiz/LikeQuiz.vue";
+
 const props = defineProps({
-  categoryId: {
+  category: {
     type: Number,
     default: 1
   },
-  id: {
+  code: {
     type: Number,
     default: 1,
   },
@@ -51,27 +71,35 @@ const props = defineProps({
   },
 });
 
-const nextId : number = props.id + 1;
+const nextCode : number = props.code + 1;
 
-const data  = await quizData.getQuizData(props.categoryId,props.id);
+const data = await quizData.getQuizData(props.category, props.code);
 const answers = data["answers"];
 const question: string = data["question"];;
 const correct_code : number = data["correct_code"];
 
-const info:String = data["info"];
+const info: String = data["info"];
 
 const route = useRoute()
 const router = useRouter();
 
-const isCorrectFlag = isCorrect(props.answerId , correct_code);
+const isCorrectFlag: boolean = isCorrect(props.answerId , correct_code);
+const categoryData = quizData.getCategoryData(props.category);
+
+let lastFlag: boolean = false;
+const quizNum:number = categoryData.num;
+
+if (props.code == quizNum) {
+  lastFlag = true;
+}
 
 addEventListener("popstate", () => {
     const uri = route.path;
-    router.push("/answer/"+ props.id + "/" + nextId);
+    router.push("/answer/"+ props.code + "/" + nextCode);
   })
 
 //クイズの結果を書き込み
-quizResultLS.saveQuizResult(props.categoryId , props.id ,isCorrectFlag)
+quizResultLS.saveQuizResult(props.category , props.code ,isCorrectFlag)
 
 //正解かどうかフラグ
 function isCorrect(answerCode: number, correctCode: number){
@@ -111,5 +139,56 @@ button.answer_button_correct_disable {
   margin-bottom: 0.2em;
   white-space: nowrap;
 }
+
+.block_correct_right {
+  color: #007bff;
+  margin-top: 0em;
+  margin-left: 0.5em;
+  font-weight: bold;
+}
+
+.block_correct_left {
+  color: red;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  margin-left: 0.7em;
+  font-weight: bold;
+}
+
+.correct_text {
+  color: #007bff;
+  margin-top: 0.2em;
+  margin-left: 0.1em;
+  margin-bottom: 0em;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.box_info_answer {
+  position: relative;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border: 0.1px solid white;
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: 0.1em;
+  margin-right: 0.2em;
+  background: whitesmoke;
+  white-space: pre-line;
+}
+
+
+.block_number_container {
+  display: flex;
+  align-items: center;
+  margin-bottom:0.5em ;
+}
+
+
+
 
 </style>

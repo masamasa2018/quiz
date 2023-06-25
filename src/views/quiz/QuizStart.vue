@@ -1,15 +1,21 @@
 <template>
     <!-- <h2>初めてのコンポーネントaaa</h2> -->
 
-    <p class="common_title">{{categoryData.name}}</p>
+    
+    <p class="common_title">{{categoryData.name}}</p> 
+    
 
-    <categoryImageList :isMoblie = isMoblie :categoryId = categoryId />
+    <categoryImageList :isMoblie = isMoblie :category = category />
+    
+    
     
     <div class="box">
       <p class="block_start">{{categoryData.start_info}}</p>
-      <p>お楽しみいただければと思います。</p>
+      <p class="block_start">全{{categoryData.num}}問</p>
+
+      <p class="block_start">お楽しみいただければと思います。</p>
     
-      <RouterLink :to="`/quiz/`+ categoryId + `/1`">
+      <RouterLink :to="`/quiz/`+ category + `/1`">
         <button class="quizStart">やってみる</button>
       </RouterLink>
 
@@ -30,16 +36,12 @@ import quizData from '../../model/quiz/quizData';
 const route = useRoute();
 const router = useRouter();
 
-const categoryId:number = Number(route.params.category_id);
+const category:number = Number(route.params.category);
 
 var isMoblie = true;
 if(window.innerWidth > 500){
     isMoblie = false;
 }
-
-const categoryData = quizData.getCategoryData(categoryId);
-
-// const quizTitle :String = CONFIG.quizTitle;
-
+const categoryData = quizData.getCategoryData(category);
 
 </script>
